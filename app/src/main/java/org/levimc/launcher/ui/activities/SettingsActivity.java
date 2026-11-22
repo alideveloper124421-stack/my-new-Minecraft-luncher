@@ -41,7 +41,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.levimc.launcher.R;
 import org.levimc.launcher.core.crash.CrashReporter;
-// import org.levimc.launcher.core.discord.// DiscordPresence;
+// import org.levimc.launcher.core.discord.// // DiscordPresence;
 import org.levimc.launcher.preloader.PreloaderSignatureRulesManager;
 import org.levimc.launcher.settings.FeatureSettings;
 import org.levimc.launcher.ui.animation.DynamicAnim;
@@ -547,10 +547,10 @@ public class SettingsActivity extends BaseActivity {
 
         SwitchMaterial switchDiscordPresence = findViewById(R.id.switch_discord_presence);
         switchDiscordPresence.setChecked(fs.isDiscordRichPresenceEnabled());
-        switchDiscordPresence.setEnabled(// DiscordPresence.isConfigured());
+        switchDiscordPresence.setEnabled(// // DiscordPresence.isConfigured());
         switchDiscordPresence.setOnCheckedChangeListener((btn, checked) -> {
             fs.setDiscordRichPresenceEnabled(checked);
-            // DiscordPresence.refresh();
+            // // DiscordPresence.refresh();
         });
 
         SwitchMaterial switchManagedLogin = findViewById(R.id.switch_managed_login);

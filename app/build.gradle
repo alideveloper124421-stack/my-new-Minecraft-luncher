@@ -190,7 +190,7 @@ android {
 }
 
 dependencies {
-    // // implementation files('libs/discord_partner_sdk.aar')
+    // // // // implementation files('libs/discord_partner_sdk.aar')
     implementation project(':minecraft')
     implementation project(':pojav_controls')
     implementation libs.commonmark

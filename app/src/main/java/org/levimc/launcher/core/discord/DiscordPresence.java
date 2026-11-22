@@ -9,7 +9,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
 
-// import com.discord.socialsdk.// DiscordSocialSdkInit;
+// import com.discord.socialsdk.// // DiscordSocialSdkInit;
 
 import org.levimc.launcher.BuildConfig;
 import org.levimc.launcher.core.minecraft.MinecraftActivity;
@@ -23,10 +23,10 @@ import org.levimc.launcher.util.NativeBridgeHelper;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
-public final class // DiscordPresence implements Application.ActivityLifecycleCallbacks {
+public final class // // DiscordPresence implements Application.ActivityLifecycleCallbacks {
     private static final long START_DELAY_MS = 750;
     private static final long BACKGROUND_DELAY_MS = 1000;
-    private static // DiscordPresence instance;
+    private static // // DiscordPresence instance;
 
     private final Application application;
     private final Handler main = new Handler(Looper.getMainLooper());
@@ -42,13 +42,13 @@ public final class // DiscordPresence implements Application.ActivityLifecycleCa
     private String version = "";
     private long startedAt;
 
-    private // DiscordPresence(Application application) {
+    private // // DiscordPresence(Application application) {
         this.application = application;
         application.registerActivityLifecycleCallbacks(this);
     }
 
     public static void initialize(Application application) {
-        if (instance == null) instance = new // DiscordPresence(application);
+        if (instance == null) instance = new // // DiscordPresence(application);
     }
 
     public static boolean isConfigured() {
@@ -56,12 +56,12 @@ public final class // DiscordPresence implements Application.ActivityLifecycleCa
     }
 
     public static void refresh() {
-        // DiscordPresence presence = instance;
+        // // DiscordPresence presence = instance;
         if (presence != null) presence.main.post(() -> presence.schedule(0));
     }
 
     public static void shutdown() {
-        // DiscordPresence presence = instance;
+        // // DiscordPresence presence = instance;
         if (presence == null) return;
         presence.main.post(() -> {
             presence.shuttingDown = true;
@@ -225,7 +225,7 @@ public final class // DiscordPresence implements Application.ActivityLifecycleCa
 
     private final class Engine {
         final WeakReference<Activity> owner;
-        final HandlerThread thread = new HandlerThread("// DiscordPresence", Process.THREAD_PRIORITY_BACKGROUND);
+        final HandlerThread thread = new HandlerThread("// // DiscordPresence", Process.THREAD_PRIORITY_BACKGROUND);
         final Handler worker;
         volatile boolean active = true;
         long handle;
@@ -235,7 +235,7 @@ public final class // DiscordPresence implements Application.ActivityLifecycleCa
             public void run() {
                 if (!active || handle == 0) return;
                 try {
-                    // DiscordPresenceNative.tick(handle);
+                    // // DiscordPresenceNative.tick(handle);
                     worker.postDelayed(this, 100);
                 } catch (LinkageError | RuntimeException error) {
                     main.post(() -> engineFailed(Engine.this, error));
@@ -250,11 +250,11 @@ public final class // DiscordPresence implements Application.ActivityLifecycleCa
             worker.post(() -> {
                 if (!active) return;
                 try {
-                    // DiscordSocialSdkInit.setEngineActivity(activity);
+                    // // DiscordSocialSdkInit.setEngineActivity(activity);
                     if (!NativeBridgeHelper.ensureGxCoreLoaded()) {
                         throw new UnsatisfiedLinkError("GXCore is unavailable");
                     }
-                    handle = // DiscordPresenceNative.create(BuildConfig.DISCORD_APPLICATION_ID);
+                    handle = // // DiscordPresenceNative.create(BuildConfig.DISCORD_APPLICATION_ID);
                     if (handle == 0) throw new IllegalStateException("Discord client was not created");
                     worker.postDelayed(pump, 100);
                 } catch (LinkageError | RuntimeException error) {
@@ -269,7 +269,7 @@ public final class // DiscordPresence implements Application.ActivityLifecycleCa
             worker.post(() -> {
                 if (!active || handle == 0) return;
                 try {
-                    // DiscordPresenceNative.update(handle, snapshot.details, snapshot.state,
+                    // // DiscordPresenceNative.update(handle, snapshot.details, snapshot.state,
                             snapshot.startedAt, BuildConfig.DISCORD_LARGE_IMAGE);
                 } catch (LinkageError | RuntimeException error) {
                     main.post(() -> engineFailed(this, error));
@@ -282,7 +282,7 @@ public final class // DiscordPresence implements Application.ActivityLifecycleCa
             worker.post(() -> {
                 worker.removeCallbacks(pump);
                 try {
-                    if (handle != 0) // DiscordPresenceNative.destroy(handle);
+                    if (handle != 0) // // DiscordPresenceNative.destroy(handle);
                 } catch (LinkageError | RuntimeException error) {
                 } finally {
                     handle = 0;
